@@ -1,40 +1,73 @@
 # LFPYPDATER
 Codice per inserimenti massivi di dati sul sito per la [Predizione del grasso nel fegato](https://www.predictliverfat.org/#prediction_models)
 
-## Request + Response
-Utilizzo la libreria *requests* per interpellare la pagina https://www.predictliverfat.org/check-liver-models.php adibita al calcolo dell'algoritmo.
+## File CSV in import
 
-1. Invio una Richiesta di tipo POST con la seguente formattazione di dati
-```json
-{
-    'waist_unit': 'cm',
-    'waist': '70',
-    'weight_unit': 'kg',
-    'weight': '40',
-    'height_unit': 'cm',
-    'height': '140',
-    'alcohol_status': '3',
-    'diabetes_status': '1',
-    'sbp': '22',
-    'dbp': '33',
-    'alt_unit': 'U/L',
-    'alt': '5',
-    'ast_unit': 'U/L',
-    'ast': '5',
-    'tg_unit': 'mmol/L',
-    'tg': '5',
-    'hba1c_unit': 'mmol/mol',
-    'hba1c': '11',
-    'glu_unit': 'mmol/L',
-    'fasting_glu': '5',
-    'ins_unit': 'pmol/L',
-    'fasting_ins': '5',
-    'fl-submit': 'Submit'   }
-```
+il file csv da cui verranno presi i dati dovrà avere ALMENO queste colonne:
 
-2. Ricevendo come risposta:
-```html
-<h4>Submitted values, converted to default units</h4><dl id="submitted"><dt>Waist circumference <span class="unit">(cm)</span></dt><dd>70</dd><dt>Weight <span class="unit">(kg)</span></dt><dd>40</dd><dt>Height <span class="unit">(cm)</span></dt><dd>140</dd><dt>Systolic blood pressure <span class="unit">(mm Hg)</span></dt><dd>22</dd><dt>Diastolic blood pressure <span class="unit">(mm Hg)</span></dt><dd>33</dd><dt>Alanine transaminase <span class="unit">(U/L)</span></dt><dd>5</dd><dt>Aspartate transaminase <span class="unit">(U/L)</span></dt><dd>5</dd><dt>Triglyceride 
-levels <span class="unit">(mmol/L)</span></dt><dd>5</dd><dt>HbA1C <span class="unit">(mmol/mol)</span></dt><dd>11</dd><dt>Fasting insulin <span class="unit">(pmol/L)</span></dt><dd>5</dd><dt>Fasting glucose <span class="unit">(mmol/L)</span></dt><dd>5</dd><dt>Alcohol consumption </dt><dd>Regularly</dd><dt>Diabetes status </dt><dd>Non-diabetic</dd></dl><h4>Prediction by the best matching model for the variables in use</h4><ul><li><span class="model-label">Model 3: </span><span class="model-info">Low risk of fatty liver, probability: 0.30</span></li></ul>
-```
-3. Dalla risposta non resta che estrarre la stringa con classe "_model-info_" usando la libreria *beautifulsoup4*
+* waist_unit     ( = Waist Unit )
+* waist     ( = Waist )
+* weight     ( = Weight )
+* weight_unit     ( = Weight Unit )
+* height     ( = Height )
+* height_unit     ( = Height Unit )
+* alcohol_status     ( = Alcohol consumption )
+* diabetes_status     ( = Diabetes status )
+* sbp     ( = Blood pressure (mm Hg) Systolic  )
+* dbp     ( = Blood pressure (mm Hg) Diastolic  )
+* alt_unit     ( = Alanine transaminase (ALT) Unit )
+* alt     ( = Alanine transaminase (ALT) )
+* ast_unit     ( = Aspartate transaminase (AST) unit )
+* ast     ( = Aspartate transaminase (AST) )
+* tg_unit     ( = Triglyceride levels (TG) Unit )
+* tg     ( = Triglyceride levels (TG) )
+* hba1c_unit     ( = HbA1C Unit )
+* hba1c     ( = HbA1C )
+* glu_unit     ( = Fasting glucose Unit )
+* fasting_glu     ( = Fasting glucose )
+* ins_unit     ( = Fasting insulin Unit )
+* fasting_ins     ( = Fasting insulin )
+
+
+: : : Vedi [CSV_TEMPLATE.csv](DOCS/TEMPLATE.csv) : : :
+
+
+### Unità di misura
+
+Le unità di misura dovranno essere PRECISAMENTE tra queste alternative elencate per i vari tipi di dato
+
+* Waist Unit
+    * cm
+    * in
+* Weight Unit
+    * kg
+    * lb
+* Height Unit
+    * cm
+    * in
+* Alanine transaminase (ALT) Unit
+    * U/L
+    * µkat/L
+* Aspartate transaminase (AST) unit
+    * U/L
+    * µkat/L
+* Triglyceride levels (TG) Unit
+    * mmol/L
+    * mg/dL
+* HbA1C Unit
+    * mmol/mol
+    * %
+
+_il sito presenta un errore per cui per questi due campi vale solo una unità di misura_
+* Fasting glucose Unit
+    * mmol/L
+* Fasting insulin Unit
+    * pmol/L
+
+
+
+
+
+
+
+
