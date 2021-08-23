@@ -1,7 +1,7 @@
 import requests
+from bs4 import BeautifulSoup
 
-res = requests.post('https://www.predictliverfat.org/check-liver-models.php', data={
-                                                                                    'waist_unit': 'cm',
+res = requests.post('https://www.predictliverfat.org/check-liver-models.php', data={'waist_unit': 'cm',
                                                                                     'waist': '70',
                                                                                     'weight_unit': 'kg',
                                                                                     'weight': '40',
@@ -25,6 +25,8 @@ res = requests.post('https://www.predictliverfat.org/check-liver-models.php', da
                                                                                     'fasting_ins': '5',
                                                                                     'fl-submit': 'Submit'})
 
+model_info = BeautifulSoup(res.text, 'html5lib').find("span", class_="model-info").text
+probability_level = model_info.split()[0]
+probability = model_info.split()[-1]
 
-
-print(res.text)
+print(probability + " " + probability_level)
