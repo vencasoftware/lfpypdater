@@ -1,54 +1,70 @@
 import pandas as pd
 
-def readCSV(file):
-    df = pd.read_csv(file)
-    data = []
+class datahandler:
+    
+    def __init__(self, file_route):
+        self.file = file_route
+        self.df = pd.read_csv(self.file)
 
-    for rownum in range(len(df)):
+    # Cambio il valore di alcohol status
+    def __alcoholConvert(self, alcohol_status):
+        if alcohol_status == 'Never':
+            return 1
+        elif alcohol_status == 'Occasionally':
+            return 2
+        elif alcohol_status == 'Regularly':
+            return 3
 
-        # Cambio il valore di alcohol status
-        if df.iloc[rownum]['alcohol_status'] == 'Never':
-            alcohol_status = 1
-        elif df.iloc[rownum]['alcohol_status'] == 'Occasionally':
-            alcohol_status = 2
-        elif df.iloc[rownum]['alcohol_status'] == 'Regularly':
-            alcohol_status = 3
+    # Cambio il valore di diabetic status
+    def __diabetesConvert(self, diabetes_status):
+        if diabetes_status == 'Non-diabetic':
+            return 1
+        elif diabetes_status == 'Diabetic':
+            return 2
 
-        # Cambio il valore di diabetic status
-        if df.iloc[rownum]['diabetes_status'] == 'Non-diabetic':
-            diabetic_status = 1
-        elif df.iloc[rownum]['diabetes_status'] == 'Diabetic':
-            diabetic_status = 2
-        data.append(
-            {
-                'waist_unit':       df.iloc[rownum]['waist_unit'],
-                'waist':            df.iloc[rownum]['waist'],
-                'weight_unit':      df.iloc[rownum]['weight_unit'],
-                'weight':           df.iloc[rownum]['weight'],
-                'height_unit':      df.iloc[rownum]['height_unit'],
-                'height':           df.iloc[rownum]['height'],
-                'alcohol_status':   alcohol_status,
-                'diabetes_status':  diabetic_status,
-                'sbp':              df.iloc[rownum]['sbp'],
-                'dbp':              df.iloc[rownum]['dbp'],
-                'alt_unit':         df.iloc[rownum]['alt_unit'],
-                'alt':              df.iloc[rownum]['alt'],
-                'ast_unit':         df.iloc[rownum]['ast_unit'],
-                'ast':              df.iloc[rownum]['ast'],
-                'tg_unit':          df.iloc[rownum]['tg_unit'],
-                'tg':               df.iloc[rownum]['tg'],
-                'hba1c_unit':       df.iloc[rownum]['hba1c_unit'],
-                'hba1c':            df.iloc[rownum]['hba1c'],
-                'glu_unit':         df.iloc[rownum]['glu_unit'],
-                'fasting_glu':      df.iloc[rownum]['fasting_glu'],
-                'ins_unit':         df.iloc[rownum]['ins_unit'],
-                'fasting_ins':      df.iloc[rownum]['fasting_ins'],
-                'fl-submit': 'Submit'
-                })
-    return data
+    # Creo un array di json con i dati che mi servono nel csv
+    def getDataReady(self):
+        data = []
+
+        for rownum in range(len(self.df)):
+            data.append(
+                {
+                    'waist_unit':       self.df.iloc[rownum]['waist_unit'],
+                    'waist':            self.df.iloc[rownum]['waist'],
+                    'weight_unit':      self.df.iloc[rownum]['weight_unit'],
+                    'weight':           self.df.iloc[rownum]['weight'],
+                    'height_unit':      self.df.iloc[rownum]['height_unit'],
+                    'height':           self.df.iloc[rownum]['height'],
+                    'alcohol_status':   self.__alcoholConvert(self.df.iloc[rownum]['alcohol_status']),
+                    'diabetes_status':  self.__diabetesConvert(self.df.iloc[rownum]['diabetes_status']),
+                    'sbp':              self.df.iloc[rownum]['sbp'],
+                    'dbp':              self.df.iloc[rownum]['dbp'],
+                    'alt_unit':         self.df.iloc[rownum]['alt_unit'],
+                    'alt':              self.df.iloc[rownum]['alt'],
+                    'ast_unit':         self.df.iloc[rownum]['ast_unit'],
+                    'ast':              self.df.iloc[rownum]['ast'],
+                    'tg_unit':          self.df.iloc[rownum]['tg_unit'],
+                    'tg':               self.df.iloc[rownum]['tg'],
+                    'hba1c_unit':       self.df.iloc[rownum]['hba1c_unit'],
+                    'hba1c':            self.df.iloc[rownum]['hba1c'],
+                    'glu_unit':         self.df.iloc[rownum]['glu_unit'],
+                    'fasting_glu':      self.df.iloc[rownum]['fasting_glu'],
+                    'ins_unit':         self.df.iloc[rownum]['ins_unit'],
+                    'fasting_ins':      self.df.iloc[rownum]['fasting_ins'],
+                    'fl-submit': 'Submit'
+                    })
+        return data
+
+    def exportResults(self, prob, prob_level, errs):
+        self.df['probabilty'] = pd.Series(prob)
+        self.df['probabilty_level'] = pd.Series(prob_level)
+        self.df['errors'] = pd.Series(errs)
+
+        results_route = self.file[:-4] + '_RESULTS.csv'
+        self.df.to_csv(results_route, index=False)
 
 def main():
-    readCSV('../DOCS/EXAMPLE.CSV')
+    print(datahandler('../DOCS/EXAMPLE.CSV').getDataReady())
 
 if __name__ == '__main__':
     main()
