@@ -3,7 +3,7 @@ Codice per inserimenti massivi di dati sul sito per la [Predizione del grasso ne
 
 ## File CSV in import
 
-il file csv da cui verranno presi i dati dovrà avere ALMENO queste colonne:
+il file csv da cui verranno presi i dati dovrà avere queste colonne:
 
 * waist_unit     ( = Waist Unit )
 * waist     ( = Waist )
@@ -57,6 +57,13 @@ Le unità di misura dovranno essere PRECISAMENTE tra queste alternative elencate
 * HbA1C Unit
     * mmol/mol
     * %
+* Alcohol consumption
+    * Never
+    * Occasionally
+    * Regularly
+* Diabetes status
+    * Non-diabetic
+    * Diabetic
 
 _il sito presenta un errore per cui per questi due campi vale solo una unità di misura_
 * Fasting glucose Unit

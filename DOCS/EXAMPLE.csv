@@ -1,0 +1,9 @@
+﻿waist_unit,waist,weight,weight_unit,height,height_unit,alcohol_status,diabetes_status,sbp,dbp,alt_unit,alt,ast_unit,ast,tg_unit,tg,hba1c_unit,hba1c,glu_unit,fasting_glu,ins_unit,fasting_ins
+cm,71,46,kg,160,cm,Never,Diabetic,22,33,U/L,5,U/L,5,mmol/L,5,mmol/mol,11,mmol/L,5,pmol/L,5
+cm,81,56,kg,170,cm,Never,Diabetic,22,33,U/L,6,U/L,6,mmol/L,6,mmol/mol,12,mmol/L,6,pmol/L,6
+cm,91,66,kg,180,cm,Never,Diabetic,22,33,U/L,7,U/L,7,mmol/L,7,mmol/mol,13,mmol/L,7,pmol/L,7
+cm,101,76,kg,190,cm,Never,Diabetic,22,33,U/L,8,U/L,8,mmol/L,8,mmol/mol,14,mmol/L,8,pmol/L,8
+cm,111,86,kg,200,cm,Never,Diabetic,22,33,U/L,9,U/L,9,mmol/L,9,mmol/mol,15,mmol/L,9,pmol/L,9
+cm,121,96,kg,210,cm,Never,Diabetic,22,33,U/L,10,U/L,10,mmol/L,10,mmol/mol,16,mmol/L,10,pmol/L,10
+cm,131,106,kg,220,cm,Never,Diabetic,22,33,U/L,11,U/L,11,mmol/L,11,mmol/mol,17,mmol/L,11,pmol/L,11
+cm,141,116,kg,230,cm,Never,Diabetic,22,33,U/L,12,U/L,12,mmol/L,12,mmol/mol,18,mmol/L,12,pmol/L,12
